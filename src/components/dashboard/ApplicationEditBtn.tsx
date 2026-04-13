@@ -30,8 +30,8 @@ const formSchema = z.object({
   url: z.url().optional().or(z.literal("")),
   location: z.string().optional(),
   workType: z.enum(["REMOTE", "HYBRID", "ONSITE"]).optional(),
-  salaryMin: z.coerce.number().positive().optional(),
-  salaryMax: z.coerce.number().positive().optional(),
+  salaryMin: z.number().optional(),
+  salaryMax: z.number().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;

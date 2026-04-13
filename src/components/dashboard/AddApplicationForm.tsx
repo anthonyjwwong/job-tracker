@@ -12,12 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Field,
-  FieldLabel,
-  FieldError,
-  FieldDescription,
-} from "@/components/ui/field";
+import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import {
   Select,
   SelectContent,
@@ -43,8 +38,8 @@ const formSchema = z.object({
     "REJECTED",
     "GHOSTED",
   ]),
-  salaryMin: z.coerce.number().positive().optional(),
-  salaryMax: z.coerce.number().positive().optional(),
+  salaryMin: z.number().optional(),
+  salaryMax: z.number().optional(),
 });
 type FormValues = z.infer<typeof formSchema>;
 
