@@ -8,11 +8,16 @@ const prisma = new PrismaClient({ adapter });
 
 async function main() {
   const user = await prisma.user.upsert({
-    where: { email: "dev@test.com" },
+    where: { email: "awodev344@gmail.com" },
     update: {},
     create: {
-      email: "dev@test.com",
-      name: "Dev User",
+      email: "awodev344@gmail.com",
+      name: "Anthony Wong",
+    },
+  });
+  await prisma.application.deleteMany({
+    where: {
+      userId: user.id,
     },
   });
 
