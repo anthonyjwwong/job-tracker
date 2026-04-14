@@ -44,3 +44,51 @@ export const editApplicationSchema = z.object({
   salaryMin: z.number().positive().optional(),
   salaryMax: z.number().positive().optional(),
 });
+
+// export async function createApplication(data: FormData) {
+//   const dataObj = {
+//     company: data.get("company"),
+//     role: data.get("role"),
+//     url: data.get("url") || "",
+//     location: data.get("location") || undefined,
+//     workType: data.get("workType") || undefined,
+//     currentStatus: data.get("currentStatus"),
+
+//     salaryMin: data.get("salaryMin")
+//       ? Number(data.get("salaryMin"))
+//       : undefined,
+
+//     salaryMax: data.get("salaryMax")
+//       ? Number(data.get("salaryMax"))
+//       : undefined,
+
+//     appliedAt: data.get("appliedAt")
+//       ? new Date(data.get("appliedAt") as string)
+//       : undefined,
+//   };
+
+//   const result = formSchema.safeParse(dataObj);
+//   if (!result.success) {
+//     return { success: false, error: result.error.flatten() };
+//   }
+
+//   const session = await auth();
+
+//   if (!session?.user?.id) {
+//     return { success: false, error: "Unauthorized" };
+//   }
+
+//   const newApplication = await prisma.application.create({
+//     data: {
+//       ...result.data,
+//       userId: session.user.id,
+//       statusEvents: {
+//         create: {
+//           status: result.data.currentStatus,
+//           note: "Application created",
+//         },
+//       },
+//     },
+//   });
+//   return { success: true, data: newApplication };
+// }

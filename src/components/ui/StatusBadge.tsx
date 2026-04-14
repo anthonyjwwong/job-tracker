@@ -1,17 +1,8 @@
 import { Badge } from "@/components/ui/badge";
-
-type statusVariant =
-  | "INTERVIEW"
-  | "APPLIED"
-  | "SCREENING"
-  | "WISHLIST"
-  | "REJECTED"
-  | "GHOSTED"
-  | "OFFER"
-  | "ACCEPTED";
+import { ApplicationStatus } from "@/generated/prisma/client";
 
 interface statusProps {
-  status: statusVariant;
+  status: ApplicationStatus;
 }
 
 const StatusBadge = ({ status }: statusProps) => {

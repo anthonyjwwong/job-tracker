@@ -10,6 +10,7 @@ import { useState } from "react";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -30,8 +31,8 @@ const formSchema = z.object({
   url: z.url().optional().or(z.literal("")),
   location: z.string().optional(),
   workType: z.enum(["REMOTE", "HYBRID", "ONSITE"]).optional(),
-  salaryMin: z.number().optional(),
-  salaryMax: z.number().optional(),
+  salaryMin: z.number().nullable().optional(),
+  salaryMax: z.number().nullable().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -61,8 +62,8 @@ const ApplicationEditBtn = ({ app }: Props) => {
       url: app.url ?? "",
       location: app.location ?? "",
       workType: app.workType ?? undefined,
-      salaryMin: app.salaryMin ?? undefined,
-      salaryMax: app.salaryMax ?? undefined,
+      salaryMin: app.salaryMin ?? null,
+      salaryMax: app.salaryMax ?? null,
     },
   });
 
@@ -89,6 +90,9 @@ const ApplicationEditBtn = ({ app }: Props) => {
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Edit Application</DialogTitle>
+          <DialogDescription>
+            This edits the current application
+          </DialogDescription>
         </DialogHeader>
 
         {/* Form */}
@@ -165,7 +169,10 @@ const ApplicationEditBtn = ({ app }: Props) => {
               render={({ field }) => (
                 <Field>
                   <FieldLabel>Work type</FieldLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value || ""}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select..." />
                     </SelectTrigger>
@@ -189,9 +196,15 @@ const ApplicationEditBtn = ({ app }: Props) => {
                   <FieldLabel htmlFor={field.name}>Salary min</FieldLabel>
                   <Input
                     {...field}
+                    value={field.value ?? ""}
                     id={field.name}
                     type="number"
                     placeholder="80000"
+                    onChange={(e) =>
+                      field.onChange(
+                        e.target.value === "" ? null : Number(e.target.value),
+                      )
+                    }
                   />
                 </Field>
               )}
@@ -205,9 +218,15 @@ const ApplicationEditBtn = ({ app }: Props) => {
                   <FieldLabel htmlFor={field.name}>Salary max</FieldLabel>
                   <Input
                     {...field}
+                    value={field.value ?? ""}
                     id={field.name}
                     type="number"
                     placeholder="120000"
+                    onChange={(e) =>
+                      field.onChange(
+                        e.target.value === "" ? null : Number(e.target.value),
+                      )
+                    }
                   />
                 </Field>
               )}

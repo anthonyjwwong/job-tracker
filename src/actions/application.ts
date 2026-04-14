@@ -12,37 +12,16 @@ import {
   editApplicationSchema,
 } from "@/lib/schemas";
 
-export async function createApplication(data: FormData) {
-  const dataObj = {
-    company: data.get("company"),
-    role: data.get("role"),
-    url: data.get("url") || "",
-    location: data.get("location") || undefined,
-    workType: data.get("workType") || undefined,
-    currentStatus: data.get("currentStatus"),
-
-    salaryMin: data.get("salaryMin")
-      ? Number(data.get("salaryMin"))
-      : undefined,
-
-    salaryMax: data.get("salaryMax")
-      ? Number(data.get("salaryMax"))
-      : undefined,
-
-    appliedAt: data.get("appliedAt")
-      ? new Date(data.get("appliedAt") as string)
-      : undefined,
-  };
-
-  const result = formSchema.safeParse(dataObj);
-  if (!result.success) {
-    return { success: false, error: result.error.flatten() };
-  }
-
+export async function createApplication(input: unknown) {
   const session = await auth();
 
   if (!session?.user?.id) {
     return { success: false, error: "Unauthorized" };
+  }
+
+  const result = formSchema.safeParse(input);
+  if (!result.success) {
+    return { success: false, error: result.error };
   }
 
   const newApplication = await prisma.application.create({
