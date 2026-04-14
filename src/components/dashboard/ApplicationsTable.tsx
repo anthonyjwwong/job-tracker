@@ -10,18 +10,25 @@ import {
 } from "@/components/ui/table";
 import StatusBadge from "@/components/ui/StatusBadge";
 import { formatSalary } from "@/lib/formatters";
-import { Application } from "@/generated/prisma/client";
+import { Application, ApplicationStatus } from "@/generated/prisma/client";
 import { useRouter } from "next/navigation";
 
 type Props = {
+  filters: "ALL" | ApplicationStatus;
   applications: Application[];
 };
 
-const ApplicationsTable = ({ applications }: Props) => {
+const ApplicationsTable = ({ applications, filters }: Props) => {
   const router = useRouter();
   const handleClick = (app: string) => {
     router.push(`/dashboard/application/${app}`);
   };
+
+  const currentFilter =
+    filters === "ALL"
+      ? applications
+      : applications.filter((app) => app.currentStatus === filters);
+
   return (
     <div className="mt-5">
       <Table>
@@ -35,7 +42,7 @@ const ApplicationsTable = ({ applications }: Props) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {applications.map((app) => (
+          {currentFilter.map((app) => (
             <TableRow
               key={app.id}
               className="cursor-pointer"
