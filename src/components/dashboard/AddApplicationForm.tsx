@@ -8,6 +8,7 @@ import { useState } from "react";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -38,8 +39,8 @@ const formSchema = z.object({
     "REJECTED",
     "GHOSTED",
   ]),
-  salaryMin: z.number().optional(),
-  salaryMax: z.number().optional(),
+  salaryMin: z.number().nullable().optional(),
+  salaryMax: z.number().nullable().optional(),
 });
 type FormValues = z.infer<typeof formSchema>;
 
@@ -56,21 +57,14 @@ const AddApplicationForm = () => {
       location: "",
       workType: undefined,
       currentStatus: "APPLIED",
-      salaryMin: undefined,
-      salaryMax: undefined,
+      salaryMin: null,
+      salaryMax: null,
     },
   });
 
   async function onSubmit(values: FormValues) {
-    const formData = new FormData();
-    Object.entries(values).forEach(([key, value]) => {
-      if (value !== undefined && value !== "") {
-        formData.append(key, String(value));
-      }
-    });
+    const result = await createApplication({ ...values });
 
-    const result = await createApplication(formData);
-    console.log(result);
     if (result?.success) {
       form.reset();
       setOpen(false);
@@ -86,6 +80,9 @@ const AddApplicationForm = () => {
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Add application</DialogTitle>
+          <DialogDescription>
+            This action adds the application.
+          </DialogDescription>
         </DialogHeader>
 
         {/* Form */}
@@ -186,9 +183,15 @@ const AddApplicationForm = () => {
                   <FieldLabel htmlFor={field.name}>Salary min</FieldLabel>
                   <Input
                     {...field}
+                    value={field.value ?? ""}
                     id={field.name}
                     type="number"
                     placeholder="80000"
+                    onChange={(e) =>
+                      field.onChange(
+                        e.target.value === "" ? null : Number(e.target.value),
+                      )
+                    }
                   />
                 </Field>
               )}
@@ -202,9 +205,15 @@ const AddApplicationForm = () => {
                   <FieldLabel htmlFor={field.name}>Salary max</FieldLabel>
                   <Input
                     {...field}
+                    value={field.value ?? ""}
                     id={field.name}
                     type="number"
                     placeholder="120000"
+                    onChange={(e) =>
+                      field.onChange(
+                        e.target.value === "" ? null : Number(e.target.value),
+                      )
+                    }
                   />
                 </Field>
               )}
@@ -217,7 +226,10 @@ const AddApplicationForm = () => {
             render={({ field }) => (
               <Field>
                 <FieldLabel>Status</FieldLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value || ""}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select status..." />
                   </SelectTrigger>

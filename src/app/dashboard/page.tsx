@@ -1,8 +1,7 @@
 import { auth } from "@/auth";
 import { signOut } from "@/auth";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
-import StatusFilters from "@/components/dashboard/StatusFilters";
-import ApplicationsTable from "@/components/dashboard/ApplicationsTable";
+
+import DashboardView from "@/components/dashboard/DashboardView";
 
 import { prisma } from "@/lib/prisma";
 
@@ -18,15 +17,9 @@ export default async function DashboardPage() {
     },
   });
 
-  console.log("session:", session);
-  console.log("applications:", applications);
-  console.log("applications:", applications[0].appliedAt.toDateString());
-
   return (
     <div className="p-8">
-      <DashboardHeader />
-      <StatusFilters />
-      <ApplicationsTable applications={applications} />
+      <DashboardView applications={applications} />
 
       <h1 className="text-xl font-semibold">Welcome, {session?.user?.name}</h1>
       <p className="text-gray-500 text-sm mt-1">{session?.user?.email}</p>
