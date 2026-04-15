@@ -48,7 +48,7 @@ const BarSection = ({ applications }: Props) => {
   }));
 
   return (
-    <div className="mt-4 pt-3">
+    <div className="mt-10 pt-3">
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data} layout="vertical">
           <XAxis

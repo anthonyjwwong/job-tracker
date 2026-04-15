@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import StatusBadge from "@/components/ui/StatusBadge";
 import ApplicationDeleteBtn from "@/components/dashboard/ApplicationDeleteBtn";
 import ApplicationEditBtn from "@/components/dashboard/ApplicationEditBtn";
+
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
 

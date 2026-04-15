@@ -10,7 +10,7 @@ type Props = {
 
 const DashboardHeader = ({ views, setView }: Props) => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between mt-15">
       <p>My applications</p>
       <div className="flex gap-2">
         <Button
