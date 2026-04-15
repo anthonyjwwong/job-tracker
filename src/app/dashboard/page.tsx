@@ -15,6 +15,7 @@ export default async function DashboardPage() {
     orderBy: {
       appliedAt: "desc",
     },
+    include: { statusEvents: true },
   });
 
   return (
