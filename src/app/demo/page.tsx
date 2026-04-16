@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+
+export const dynamic = "force-dynamic";
+
 export default async function DemoPage() {
   const DEMO_USER_ID = "cmo1fwhz10000skutrglbeb4d";
 
