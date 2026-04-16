@@ -35,30 +35,21 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </Link>
       </Button>
 
-      <div className="mt-10 flex justify-between">
+      <div className="mt-10 flex md:justify-between">
         {/* Left side of Application Page */}
-        <div className="flex gap-1">
+        <div className="grid p-4">
           <div>
             <h1 className="text-3xl">{app?.company}</h1>
-            <p>{app?.role}</p>
           </div>
-          <div className="pt-8 font-bold">
-            <p>.</p>
-          </div>
-          <div className="pt-9">
-            <p>{app?.location}</p>
-          </div>
-          <div className="pt-8 font-bold">
-            <p>.</p>
-          </div>
-          <div className="pt-9">
-            <p>{app?.workType}</p>
-          </div>
-          <div className="pt-8 font-bold">
-            <p>.</p>
-          </div>
-          <div className="pt-9">
-            <p>
+
+          <div className="md:flex gap-2">
+            <p className="text-sm mt-1">{app?.role} </p>
+            <span className="hidden md:inline">.</span>
+            <p className="text-sm mt-1">{app?.location}</p>
+            <span className="hidden md:inline">.</span>
+            <p className="text-sm mt-1">{app?.workType} </p>
+            <span className="hidden md:inline">.</span>
+            <p className="text-sm mt-1">
               {!app?.salaryMin && !app?.salaryMax
                 ? "Not Available"
                 : `${formatSalary(app?.salaryMin)} - ${formatSalary(app?.salaryMax)}`}
@@ -66,13 +57,13 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
         {/* Right side of Application Page */}
-        <div className="flex gap-4">
+        <div className="flex flex-col p-4 md:flex-row md:mt-4 gap-2">
           <ApplicationEditBtn app={app} />
           <ApplicationDeleteBtn appId={app.id} />
         </div>
       </div>
 
-      <div className="flex px-2 justify-between">
+      <div className="flex flex-col px-2 justify-between md:flex-row">
         {/* Left Column - Dynamic Timeline*/}
         <div className="mt-10">
           <ApplicationTabs app={app} />

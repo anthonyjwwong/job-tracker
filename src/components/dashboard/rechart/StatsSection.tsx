@@ -46,7 +46,7 @@ const StatsSection = ({ applications }: Props) => {
       : 0;
 
   return (
-    <div className="flex gap-15">
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
       <div className="border flex-1 p-3 rounded-lg">
         <p className="text-sm">Total applications</p>
         <p className="font-bold text-2xl py-1">{applications.length}</p>

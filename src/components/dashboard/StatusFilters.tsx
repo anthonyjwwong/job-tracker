@@ -10,7 +10,7 @@ type Props = {
 
 const StatusFilters = ({ setFilters, filters }: Props) => {
   return (
-    <div className="flex gap-1 mt-5">
+    <div className="flex flex-wrap gap-1 mt-6">
       <Button
         variant="outline"
         className={`rounded-md ${filters === "ALL" ? "bg-gray-200" : "bg-white"}`}

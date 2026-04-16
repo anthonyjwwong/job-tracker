@@ -19,7 +19,7 @@ export default async function DashboardPage() {
   });
 
   return (
-    <div className="p-8">
+    <div className="md:p-8">
       <DashboardView applications={applications} />
 
       <h1 className="text-xl font-semibold">Welcome, {session?.user?.name}</h1>

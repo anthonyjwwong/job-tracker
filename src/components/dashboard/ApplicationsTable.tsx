@@ -36,8 +36,8 @@ const ApplicationsTable = ({ applications, filters }: Props) => {
           <TableRow>
             <TableHead>Company</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Location</TableHead>
-            <TableHead>Salary</TableHead>
+            <TableHead className="hidden md:table-cell">Location</TableHead>
+            <TableHead className="hidden md:table-cell">Salary</TableHead>
             <TableHead>Applied</TableHead>
           </TableRow>
         </TableHeader>
@@ -52,8 +52,10 @@ const ApplicationsTable = ({ applications, filters }: Props) => {
               <TableCell>
                 <StatusBadge status={app.currentStatus} />
               </TableCell>
-              <TableCell>{app.location}</TableCell>
-              <TableCell>
+              <TableCell className="hidden md:table-cell">
+                {app.location}
+              </TableCell>
+              <TableCell className="hidden md:table-cell">
                 {app.salaryMin && app.salaryMax
                   ? `${formatSalary(app.salaryMin)} - ${formatSalary(app.salaryMax)}`
                   : ""}

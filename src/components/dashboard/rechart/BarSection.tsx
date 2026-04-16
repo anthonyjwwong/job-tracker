@@ -60,10 +60,10 @@ const BarSection = ({ applications }: Props) => {
           />
           <YAxis
             tickLine={false}
-            tick={{ fontSize: "0.8rem" }}
+            tick={{ fontSize: "0.7rem" }}
             type="category"
             dataKey="status"
-            width={103}
+            width={70}
             axisLine={false}
           />
           <Tooltip
