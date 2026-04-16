@@ -15,11 +15,86 @@ async function main() {
       name: "Anthony Wong",
     },
   });
-  await prisma.application.deleteMany({
-    where: {
-      userId: user.id,
+
+  const demoUser = await prisma.user.upsert({
+    where: { email: "demo@jobtracker.com" },
+    update: {},
+    create: {
+      email: "demo@jobtracker.com",
+      name: "Demo",
     },
   });
+
+  await prisma.application.deleteMany({
+    where: {
+      userId: { in: [user.id, demoUser.id] },
+    },
+  });
+
+  const demoApplications = [
+    {
+      company: "Stripe",
+      role: "Frontend Engineer",
+      url: "https://stripe.com/jobs",
+      location: "New York, NY",
+      workType: "HYBRID" as const,
+      salaryMin: 120000,
+      salaryMax: 150000,
+      currentStatus: "INTERVIEW" as const,
+    },
+    {
+      company: "Vercel",
+      role: "Full Stack Developer",
+      url: "https://vercel.com/careers",
+      location: "Remote",
+      workType: "REMOTE" as const,
+      salaryMin: 130000,
+      salaryMax: 160000,
+      currentStatus: "APPLIED" as const,
+    },
+    {
+      company: "linkedIn",
+      role: "Web Developer",
+      url: "",
+      location: "Remote",
+      workType: "REMOTE" as const,
+      salaryMin: 130000,
+      salaryMax: 160000,
+      currentStatus: "OFFER" as const,
+    },
+    {
+      company: "Linear",
+      role: "Software Engineer",
+      url: "https://linear.app/careers",
+      location: "San Francisco, CA",
+      workType: "ONSITE" as const,
+      currentStatus: "SCREENING" as const,
+    },
+    {
+      company: "Notion",
+      role: "React Developer",
+      url: "https://notion.so/careers",
+      location: "Remote",
+      workType: "REMOTE" as const,
+      currentStatus: "WISHLIST" as const,
+    },
+    {
+      company: "Figma",
+      role: "Frontend Engineer",
+      url: "https://figma.com/careers",
+      location: "New York, NY",
+      workType: "HYBRID" as const,
+      currentStatus: "REJECTED" as const,
+    },
+    {
+      company: "PlanetScale",
+      role: "Developer Advocate",
+      url: "https://planetscale.com/careers",
+      location: "Remote",
+      workType: "REMOTE" as const,
+      currentStatus: "GHOSTED" as const,
+    },
+  ];
 
   const applications = [
     {
@@ -84,6 +159,21 @@ async function main() {
         statusEvents: {
           create: {
             status: app.currentStatus,
+            note: "Initial status",
+          },
+        },
+      },
+    });
+    console.log(`Created: ${created.company} — ${created.role}`);
+  }
+  for (const demoApp of demoApplications) {
+    const created = await prisma.application.create({
+      data: {
+        ...demoApp,
+        userId: demoUser.id,
+        statusEvents: {
+          create: {
+            status: demoApp.currentStatus,
             note: "Initial status",
           },
         },

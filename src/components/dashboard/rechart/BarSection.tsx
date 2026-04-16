@@ -48,7 +48,7 @@ const BarSection = ({ applications }: Props) => {
   }));
 
   return (
-    <div className="mt-4 pt-3">
+    <div className="mt-10 pt-3">
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data} layout="vertical">
           <XAxis
@@ -60,10 +60,10 @@ const BarSection = ({ applications }: Props) => {
           />
           <YAxis
             tickLine={false}
-            tick={{ fontSize: "0.8rem" }}
+            tick={{ fontSize: "0.7rem" }}
             type="category"
             dataKey="status"
-            width={103}
+            width={70}
             axisLine={false}
           />
           <Tooltip

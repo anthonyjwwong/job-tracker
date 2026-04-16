@@ -22,9 +22,9 @@ const DashboardView = ({ applications }: Props) => {
 
   return (
     <div>
-      <DashboardHeader views={view} setView={setView} />
       <StatsSection applications={applications} />
       <BarSection applications={applications} />
+      <DashboardHeader views={view} setView={setView} />
       <StatusFilters setFilters={setFilters} filters={filters} />
       {view === "table" ? (
         <ApplicationsTable applications={applications} filters={filters} />

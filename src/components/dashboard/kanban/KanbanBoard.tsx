@@ -54,7 +54,6 @@ const KanbanBoard = ({ applications }: Props) => {
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      {" "}
       <div className="mt-5 flex gap-4 overflow-x-auto pb-4">
         {titles.map((title) => {
           const filteredApps = optimisticApplications.filter(
