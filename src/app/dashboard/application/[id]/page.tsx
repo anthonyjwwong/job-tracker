@@ -23,10 +23,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   });
 
   if (!app) notFound();
-  console.log("APP: ", app);
-  // console.log("Status Event", app?.salaryMax);
-  // console.log("Note", app?.notes);
-  // console.log("Contact", app?.contacts);
+
   return (
     <div>
       <Button asChild>

@@ -22,7 +22,6 @@ const DashboardView = ({ applications }: Props) => {
 
   return (
     <div>
-      {" "}
       <StatsSection applications={applications} />
       <BarSection applications={applications} />
       <DashboardHeader views={view} setView={setView} />

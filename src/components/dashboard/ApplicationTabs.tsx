@@ -123,18 +123,16 @@ const ApplicationTabs = ({ app }: Props) => {
           <div className="flex flex-col mt-3">
             {app.statusEvents.map((events, index) => (
               <div key={events.id} className="flex gap-3 relative pb-6">
-                {/* vertical line — hidden on last item */}
                 {index !== app.statusEvents.length - 1 && (
                   <div className="absolute left-[7px] top-5 bottom-0 w-px bg-gray-200" />
                 )}
 
-                {/* dot */}
                 <div
                   className={`w-4 h-4 rounded-full border-2 flex-shrink-0 mt-0.5 z-10
                     ${
                       index === 0
-                        ? "bg-gray-900 border-gray-900" // current — filled
-                        : "bg-white border-gray-300" // past — empty
+                        ? "bg-gray-900 border-gray-900"
+                        : "bg-white border-gray-300"
                     }`}
                 />
                 <div>

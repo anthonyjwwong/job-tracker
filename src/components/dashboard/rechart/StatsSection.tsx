@@ -17,11 +17,6 @@ const StatsSection = ({ applications }: Props) => {
       app.currentStatus !== "GHOSTED",
   ).length;
 
-  //1.For each application, find the appliedAt date
-  // of the first status event that isn't applied
-  // or wishlist
-  //2. Calculate the difference in days between those two dates.
-
   const responseDifferences = applications
     .map((app) => {
       const firstResponse = app.statusEvents
