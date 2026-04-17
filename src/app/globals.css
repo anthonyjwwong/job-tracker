@@ -134,3 +134,5 @@
     cursor: pointer;
   }
 }
+
+@safelist bg-amber-100 text-amber-700 border-amber-200;

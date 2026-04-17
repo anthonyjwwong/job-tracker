@@ -1,6 +1,12 @@
 import { Application } from "@/generated/prisma/client";
+import { needsFollowUp } from "@/lib/utils";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 type Props = {
   app: Application;
 };
@@ -25,10 +31,24 @@ const KanbanCard = ({ app }: Props) => {
       {...listeners}
       {...attributes}
     >
-      <p className="text-sm font-bold">{app.company}</p>
+      <p className="text-sm font-bold flex-col flex">
+        {app.company}
+        {needsFollowUp(app) && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="text-[10px] my-1 border w-fit pt-0.5 px-1 bg-amber-100 text-amber-700 border-amber-200 rounded-lg ">
+                follow up
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>No response for 14+ days.</p>
+            </TooltipContent>
+          </Tooltip>
+        )}
+      </p>
       <p className="text-sm">{app.role}</p>
       <p className="text-[11px] text-gray-600">
-        {app.createdAt.toDateString()}
+        {app.appliedAt.toDateString()}
       </p>
     </div>
   );
