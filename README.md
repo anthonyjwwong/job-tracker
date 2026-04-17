@@ -87,6 +87,7 @@
 ## Environment Variables
 
 ```env
+DIRECT_URL=
 DATABASE_URL=
 AUTH_SECRET=
 AUTH_GOOGLE_ID=
