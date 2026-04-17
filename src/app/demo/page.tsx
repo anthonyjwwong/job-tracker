@@ -19,7 +19,7 @@ export default async function DemoPage() {
     include: { statusEvents: true },
   });
   return (
-    <div className="p-8">
+    <div className="w-full max-w-6xl mx-auto px-6 py-8">
       <Button asChild>
         <Link href="/">
           <ArrowLeft /> Back to Home
@@ -29,7 +29,7 @@ export default async function DemoPage() {
       <h1 className="text-xl mt-4 font-semibold">Welcome, Demo User</h1>
       <p className="text-gray-500 text-sm mt-1 mb-4">Demo</p>
 
-      <DashboardView applications={applications} />
+      <DashboardView applications={applications} isDemo={true} />
     </div>
   );
 }
