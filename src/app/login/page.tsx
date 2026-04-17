@@ -1,4 +1,6 @@
 import { signIn } from "@/auth";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function LoginPage() {
   return (
@@ -41,6 +43,9 @@ export default function LoginPage() {
             </svg>
             Continue with Google
           </button>
+          <Button asChild variant="outline" className="rounded-sm mt-3 ">
+            <Link href="/">← Back to HomePage</Link>
+          </Button>
         </form>
       </div>
     </div>

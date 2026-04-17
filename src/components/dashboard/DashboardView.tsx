@@ -15,8 +15,9 @@ export type ApplicationWithEvents = Prisma.ApplicationGetPayload<{
 
 type Props = {
   applications: ApplicationWithEvents[];
+  isDemo?: boolean;
 };
-const DashboardView = ({ applications }: Props) => {
+const DashboardView = ({ applications, isDemo }: Props) => {
   const [view, setView] = useState<"table" | "kanban">("table");
   const [filters, setFilters] = useState<"ALL" | ApplicationStatus>("ALL");
 
@@ -24,7 +25,7 @@ const DashboardView = ({ applications }: Props) => {
     <div>
       <StatsSection applications={applications} />
       <BarSection applications={applications} />
-      <DashboardHeader views={view} setView={setView} />
+      <DashboardHeader views={view} setView={setView} isDemo={isDemo} />
       <StatusFilters setFilters={setFilters} filters={filters} />
       {view === "table" ? (
         <ApplicationsTable applications={applications} filters={filters} />

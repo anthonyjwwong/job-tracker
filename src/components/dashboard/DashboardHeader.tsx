@@ -6,9 +6,10 @@ import { Dispatch, SetStateAction, useState } from "react";
 type Props = {
   views: "table" | "kanban";
   setView: Dispatch<SetStateAction<"table" | "kanban">>;
+  isDemo?: boolean;
 };
 
-const DashboardHeader = ({ views, setView }: Props) => {
+const DashboardHeader = ({ views, setView, isDemo }: Props) => {
   return (
     <div className="flex justify-between mt-15">
       <p>My applications</p>
@@ -30,7 +31,7 @@ const DashboardHeader = ({ views, setView }: Props) => {
           </Button>
         </div>
 
-        <AddApplicationForm />
+        {!isDemo && <AddApplicationForm />}
       </div>
     </div>
   );
