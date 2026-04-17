@@ -12,6 +12,8 @@ import StatusBadge from "@/components/ui/StatusBadge";
 import { formatSalary } from "@/lib/formatters";
 import { Application, ApplicationStatus } from "@/generated/prisma/client";
 import { useRouter } from "next/navigation";
+import { needsFollowUp } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 type Props = {
   filters: "ALL" | ApplicationStatus;
@@ -48,7 +50,22 @@ const ApplicationsTable = ({ applications, filters }: Props) => {
               className="cursor-pointer"
               onClick={() => handleClick(app.id)}
             >
-              <TableCell>{app.company}</TableCell>
+              <TableCell className="flex items-center gap-2">
+                {app.company}
+
+                {needsFollowUp(app) && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span className="text-[10px] border w-fit pt-0.5 px-1 bg-amber-100 text-amber-700 border-amber-200 rounded-lg">
+                        follow up
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>No response for 14+ days.</p>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
+              </TableCell>
               <TableCell>
                 <StatusBadge status={app.currentStatus} />
               </TableCell>
