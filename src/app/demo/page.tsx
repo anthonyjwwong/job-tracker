@@ -28,7 +28,9 @@ export default async function DemoPage() {
 
       <h1 className="text-xl mt-4 font-semibold">Welcome, Demo User</h1>
       <p className="text-gray-500 text-sm mt-1 mb-4">Demo</p>
-
+      <p className="text-gray-500 text-sm my-2 font-bold">
+        The Kanban drag and drop is disabled in demo mode.
+      </p>
       <DashboardView applications={applications} isDemo={true} />
     </div>
   );
