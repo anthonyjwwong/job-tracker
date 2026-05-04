@@ -47,6 +47,7 @@ const KanbanCard = ({ app }: Props) => {
         )}
       </p>
       <p className="text-sm">{app.role}</p>
+      <p className="text-[10px] text-gray-600">{app.location}</p>
       <p className="text-[11px] text-gray-600">
         {app.appliedAt.toDateString()}
       </p>
