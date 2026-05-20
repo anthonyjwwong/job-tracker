@@ -41,6 +41,6 @@ export const editApplicationSchema = z.object({
   url: z.url().optional().or(z.literal("")),
   location: z.string().optional(),
   workType: z.enum(["REMOTE", "HYBRID", "ONSITE"]).optional(),
-  salaryMin: z.number().positive().optional(),
-  salaryMax: z.number().positive().optional(),
+  salaryMin: z.number().positive().nullable().optional(),
+  salaryMax: z.number().positive().nullable().optional(),
 });
