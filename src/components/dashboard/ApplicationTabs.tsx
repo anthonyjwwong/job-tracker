@@ -216,12 +216,13 @@ const ApplicationTabs = ({ app }: Props) => {
           <div className="pl-5 pt-4 pb-5">
             {app.contacts.map((contact) => (
               <div key={contact.id} className="flex">
-                <div className="bg-blue-300 rounded-full p-3">
+                <div className="bg-blue-300 rounded-full p-3 pt-5">
                   {getInitials(contact.name)}
                 </div>
                 <div className="ml-3 mt-1">
                   <p className="font-bold">{contact.name}</p>
                   <p className="text-gray-500">{contact.title}</p>
+                  <p className="text-gray-500 text-xs">{contact.email}</p>
                 </div>
               </div>
             ))}
